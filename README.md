@@ -7,19 +7,12 @@
 
 <br>
 
-<p align="center">
-    <img src="https://your-image-url.com/medbooking-screenshot.png" alt="MedBooking Screenshot">
-</p>
-
 <br>
 
 <div align="center">
     <a href="#features">Features</a> •
     <a href="#tech-stack">Tech Stack</a> •
-    <a href="#getting-started">Getting Started</a> •
-    <a href="#contributing">Contributing</a> •
-    <a href="#license">License</a>
-</div>
+    <a href="#getting-started">Getting Started</a>
 
 ---
 
@@ -40,7 +33,7 @@
     - [React.js](https://reactjs.org/)
     - [Node.js](https://nodejs.org/)
     - [Tailwind CSS](https://tailwindcss.com/)
-- 🌐 **Backend** (Link to Backend Repository): [MedBooking Backend](https://github.com/your-username/medbooking-backend)
+- 🌐 **Backend** (Link to Backend Repository): [Medico - Backend](https://github.com/argha-paul-2002/MERN_Doctor_Booking_Backend)
     - [Express.js](https://expressjs.com/)
     - [MongoDB](https://www.mongodb.com/)
 ---
@@ -67,7 +60,7 @@
 4. **Run the application**:
 
     ```bash
-    npm start
+    npm run dev
     ```
 
 5. **Access the app**:
@@ -78,7 +71,7 @@
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please check the [Contributing Guidelines](CONTRIBUTING.md) before making any contributions.
+Contributions are welcome! 
 
 ---
 
