@@ -49,7 +49,7 @@
 2. **Install dependencies**:
 
     ```bash
-    cd medbooking-frontend
+    cd medico-frontend
     npm install
     ```
 
