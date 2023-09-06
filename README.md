@@ -43,7 +43,7 @@
 1. **Clone the repository**:
 
     ```bash
-    git clone https://github.com/your-username/medbooking-frontend.git
+    git clone https://github.com/argha-paul-2002/MERN_Doctor_Booking_Frontend.git
     ```
 
 2. **Install dependencies**:
