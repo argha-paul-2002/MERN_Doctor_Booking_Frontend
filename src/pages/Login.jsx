@@ -1,15 +1,61 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
+
 
 const Login = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  let navigate = useNavigate();
+    const [credentials, setCredentials] = useState({
+        email: "",
+        password: ""
+    })
 
-  const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const handleSubmit = async(e)=>{
+    e.preventDefault();
+    const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }, 
+        body: JSON.stringify({email: credentials.email, password: credentials.password})
+      });
+      const json = await response.json()
+      //   If success = true then redirect 
+      if(json.success){
+          //  Save the auth token and redirect
+          localStorage.setItem('token', json.authtoken);
+          swal({
+            title: "Success!",
+            text: "Welcome to Medico",
+            icon: "success",
+            button: "Ok",
+          });
+          navigate("/"); 
+        }
+        else{
+            // Else Show Alert
+            swal({
+                title: "Error!",
+                text: "Invalid Credentials!",
+                icon: "error",
+                button: "Ok",
+              });
+        }
+        
+        
+        //   Clear all form fields
+        
+      console.log(json)
+      setCredentials({
+        email: "",
+        password: ""
+    })
+}
+
+const onChange = (e)=>{
+  setCredentials({...credentials, [e.target.name]: e.target.value})
+}
   
   return (
     <section className="px-5 lg:px-0">
@@ -17,14 +63,14 @@ const Login = () => {
         <h3 className="text-headingColor text-[22px] leading-9 font-bold mb-10">
           Hello! <span className="text-primaryColor ">Welcome</span> Back 🎉
         </h3>
-        <form className="py-4 md:py-0">
+        <form className="py-4 md:py-0" onSubmit={handleSubmit}>
           <div className="mb-5">
             <input
               type="email"
               name="email"
               placeholder="Enter your Email"
-              value={formData.email}
-              onChange={handleInputChange}
+              value={credentials.email}
+              onChange={onChange}
               className="w-full px-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none
                focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor rounded-md cursor-pointer"
               required
@@ -35,8 +81,8 @@ const Login = () => {
               type="password"
               name="password"
               placeholder="Password"
-              value={formData.password}
-              onChange={handleInputChange}
+              value={credentials.password}
+              onChange={onChange}
               className="w-full px-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none
                focus:border-b-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-textColor rounded-md cursor-pointer"
               required

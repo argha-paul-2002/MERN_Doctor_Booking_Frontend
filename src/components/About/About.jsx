@@ -2,6 +2,9 @@ import React from 'react';
 import aboutImg from '../../assets/images/about.png';
 import aboutCardImg from '../../assets/images/about-card.png';
 import { Link } from 'react-router-dom';
+import FaqList from '../Faq/FaqList';
+import faqImg from '../../assets/images/faq-img.png';
+
 
 const About = () => {
   return (
@@ -22,10 +25,10 @@ const About = () => {
                         Proud to be the one of the nations best
                     </h2>
                     <p className="text__para">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod expedita provident nisi totam molestiae nihil voluptate inventore ducimus repellat, maiores eius, recusandae quis, sunt dolore. Blanditiis nihil molestias iste nulla?
+                    Medico stands tall as a beacon of healthcare excellence, honored to be recognized among the nation's finest. Our unwavering commitment to top-tier care, driven by dedicated experts and cutting-edge technologies, sets us apart. This distinction fuels our passion to continually innovate and elevate healthcare standards, all while empowering our community toward a healthier future.
                     </p>
                     <p className="text__para mt-[30px]">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias neque illum sapiente et? Quod molestiae ratione deserunt, quasi sapiente cum est, dignissimos animi quidem accusantium voluptatem! Harum natus odit magni?
+                    Our relentless pursuit of excellence has propelled Medico to the forefront of healthcare. With gratitude, we continue to lead, innovate, and transform lives, setting new benchmarks along the way.
                     </p>
                     <Link to='/'>
                         <button className="btn">Learn More</button>
@@ -33,6 +36,20 @@ const About = () => {
                 </div>
             </div>
         </div>
+
+        <div className="container mt-[80px]">
+          <div className="flex justify-between gap-[50px] lg:gap-0">
+            
+            <div className="w-full md:w-1/2">
+              <h2 className='heading'>Most questions by our beloved patients</h2>
+              <FaqList />
+            </div>
+            <div className='w-1/3 hidden md:block'>
+              <img src={faqImg} alt="" />
+            </div>
+          </div>
+        </div>
+
     </section>
   )
 }

@@ -1,34 +1,75 @@
 import React, { useState } from "react";
 import signupImg from "../assets/images/signup.gif";
-import avatar from "../assets/images/doctor-img01.png";
 import { Link } from "react-router-dom";
+import swal from 'sweetalert';
+import { useNavigate } from 'react-router-dom';
+
+
 
 const Signup = () => {
-  const [selectedFile,setSelectedFile] = useState(null)
-  const [previewUrl,setPreviewUrl] = useState("")
+  let navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: '',
     email: "",
-    password: "",
-    photo: '',
-    gender: selectedFile,
-    role:'patient'
+    password: ""
   });
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleFileInputChange = async(event)=>{
-    const file = event.target.files[0]
+  const handleSubmit = async(e)=>{
+    e.preventDefault();
+    const {name, email, password} = formData;
+    const response = await fetch("http://localhost:5000/api/auth/createuser", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }, 
+        body: JSON.stringify({name, email, password})
+      });
+      const json = await response.json()
+      //   If success = true then redirect 
+      if(json.success){
+          //  Save the auth token and redirect
+          swal({
+            title: "Success!",
+            text: "Account created Successfully",
+            icon: "success",
+            button: "Ok",
+          });
+          localStorage.setItem('token', json.authtoken);
+          navigate("/"); 
+        }
+        else{
+            // Else Show Alert
+            swal({
+                title: "Error!",
+                text: "Invalid Credentials!",
+                icon: "error",
+                button: "Ok",
+              });
+        }
+        
+        
+        //   Clear all form fields
+        
+      console.log(json)
+    //   setCredentials({
+    //     name: "",
+    //     email: "",
+    //     password: "",
+    //     cpassword:""
+    // })
+}
 
-    // Later we will use cloudinary to upload images
+  // const handleFileInputChange = async(event)=>{
+  //   const file = event.target.files[0]
 
-  }
+  // }
 
-  const submitHandler = async (event)=>{
-    event.preventDefault()
-  }
+ 
 
   return (
     <section className="px-5 xl:px-0">
@@ -48,7 +89,7 @@ const Signup = () => {
               Create an <span className="text-primaryColor">account</span>
             </h3>
 
-            <form onSubmit={submitHandler}>
+            <form onSubmit={handleSubmit}>
               <div className="mb-5">
                 <input
                   type="text"
@@ -65,7 +106,7 @@ const Signup = () => {
                 <input
                   type="email"
                   name="email"
-                  placeholder="Enter youe email"
+                  placeholder="Enter your email"
                   value={formData.email}
                   onChange={handleInputChange}
                   className="w-full px-4 pr-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none
@@ -85,7 +126,7 @@ const Signup = () => {
                   required
                 />
               </div>
-              <div className="mb-5 flex items-center justify-between">
+              {/* <div className="mb-5 flex items-center justify-between">
                 <label className="text-headingColor font-bold text-[16px] leading-7">
                   Are you a:
                   <select
@@ -134,7 +175,7 @@ const Signup = () => {
                     Upload Photo
                   </label>
                 </div>
-              </div>
+              </div> */}
               <div className="mt-7">
                 <button
                   type="submit"
